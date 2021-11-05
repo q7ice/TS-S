@@ -1,4 +1,4 @@
-const { ActivationToken } = require('../../models');
+const { ActivationToken } = require('./models');
 
 class ActivationTokenRepository {
   static async add(userId, token) {

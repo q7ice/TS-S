@@ -1,5 +1,4 @@
 const { UserRepository } = require('../repository/user.repository');
-const { ActivationService } = require('./activation.service');
 const { PasswordService } = require('./password.service');
 const { TokenService } = require('./token.service');
 const { answers } = require('../constants/answers');
@@ -9,10 +8,9 @@ class AuthService {
     const emailCheck = await UserRepository.isAvailableEmail(email);
     if (emailCheck) {
       const passwordHash = PasswordService.getHash(password);
-      const user = await UserRepository.register(email, passwordHash);
-      await ActivationService.addUser(user.id);
+      await UserRepository.register(email, passwordHash);
     } else {
-      throw Error(answers.unavailableEmail);
+      throw Error(answers.error.unavailableEmail);
     }
   }
 
@@ -23,10 +21,6 @@ class AuthService {
       return TokenService.generate(user.id);
     }
     throw Error(answers.error.incorrectCredentials);
-  }
-
-  static async activate(link) {
-    await UserRepository.activateUser(link);
   }
 
   static async isAvailableEmail(email = '') {

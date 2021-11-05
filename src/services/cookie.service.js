@@ -1,16 +1,15 @@
+const jwt = 'jwt';
 class CookieService {
-  static #tokenField = 'jwt'
-
   static setToken(ctx, value) {
-    ctx.cookies.set(CookieService.#tokenField, value);
+    ctx.cookies.set(jwt, value);
   }
 
   static getToken(ctx) {
-    return ctx.cookies.get(CookieService.#tokenField);
+    return ctx.cookies.get(jwt);
   }
 
   static clearToken(ctx) {
-    ctx.cookies.set(CookieService.#tokenField, '');
+    ctx.cookies.set(jwt, '');
   }
 }
 

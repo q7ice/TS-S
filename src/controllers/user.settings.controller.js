@@ -9,20 +9,6 @@ class UserSettingsController {
     ctx.body = { message: answers.success.change.name };
   }
 
-  static async changeStatus(ctx) {
-    const { status } = ctx.request.body;
-    const { userId } = ctx.request;
-    await userService.changeStatus(userId, status);
-    ctx.body = { message: answers.success.change.status };
-  }
-
-  static async changeAvatar(ctx) {
-    const { userId } = ctx.request;
-    const imagePath = ctx.file?.path;
-    await userService.changeAvatar(userId, imagePath);
-    ctx.body = { message: answers.success.change.avatar };
-  }
-
   static async changeEmail(ctx) {
     const { email } = ctx.request.body;
     const { userId } = ctx.request;

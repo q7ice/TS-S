@@ -15,5 +15,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-return-await': 'off',
     'max-len': 'off',
+    'no-console': 'off',
+    'import/no-dynamic-require': 'off',
+    'global-require': 'off',
   },
 };

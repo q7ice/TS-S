@@ -7,7 +7,7 @@ class MailService {
     const link = createActivationLink(activationId);
     const transporter = nodemailer.createTransport(defaultSettings);
     const mailData = {
-      from: 'Cookbook service <7ice.develop@mail.ru>',
+      from: 'Quizzy <7ice.develop@mail.ru>',
       to: `${email}`,
       subject: 'Account activation',
       html: `Перейдите по <a href="${link}">ссылке</a>, чтобы активировать аккаунт`,

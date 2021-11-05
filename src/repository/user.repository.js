@@ -1,5 +1,5 @@
 const { roles } = require('../constants/permissions/roles');
-const { User } = require('../../models');
+const { User } = require('./models');
 
 class UserRepository {
   static async register(email, password, userRole = roles.USER) {
@@ -11,7 +11,7 @@ class UserRepository {
   }
 
   static async isAvailableEmail(email) {
-  	const result = await User.findOne({ where: { email } });
+    const result = await User.findOne({ where: { email } });
     return !result;
   }
 
@@ -31,11 +31,7 @@ class UserRepository {
 
   static async getUserRoleById(userId) {
     const user = await User.findOne({ where: { id: userId } });
-    return user?.dataValues?.userRole;
-  }
-
-  static async changeAvatarUrl(userId, path) {
-    await User.update({ avatarUrl: path }, { where: { id: userId } });
+    return user?.dataValues?.role;
   }
 
   static async changeName(userId, name) {
@@ -48,10 +44,6 @@ class UserRepository {
 
   static async changePassword(userId, password) {
     await User.update({ password }, { where: { id: userId } });
-  }
-
-  static async changeStatus(userId, status) {
-    await User.update({ status }, { where: { id: userId } });
   }
 
   static async getUserDataById(id) {
