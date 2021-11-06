@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Test extends Model {
     static associate({ User, Question }) {
-      Test.belongsTo(User);
+      Test.belongsTo(User, { onDelete: 'cascade', hooks: true });
       Test.hasMany(Question);
     }
   }
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    open: {
+    isOpen: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,

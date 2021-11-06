@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class TextAnswer extends Model {
     static associate({ User, Question }) {
-      TextAnswer.belongsTo(User);
-      TextAnswer.belongsTo(Question);
+      TextAnswer.belongsTo(User, { onDelete: 'cascade', hooks: true });
+      TextAnswer.belongsTo(Question, { onDelete: 'cascade', hooks: true });
     }
   }
 

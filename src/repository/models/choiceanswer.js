@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class ChoiceAnswer extends Model {
     static associate({ User, ChoiceAnswerVariant }) {
-      ChoiceAnswer.belongsTo(ChoiceAnswerVariant);
-      ChoiceAnswer.belongsTo(User);
+      ChoiceAnswer.belongsTo(ChoiceAnswerVariant, { onDelete: 'cascade', hooks: true });
+      ChoiceAnswer.belongsTo(User, { onDelete: 'cascade', hooks: true });
     }
   }
 

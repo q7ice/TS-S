@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       Test, TextAnswer,
       TextAnswerVariant, ChoiceAnswerVariant,
     }) {
-      Question.belongsTo(Test);
+      Question.belongsTo(Test, { onDelete: 'cascade', hooks: true });
       Question.hasOne(TextAnswer);
       Question.hasOne(TextAnswerVariant);
       Question.hasMany(ChoiceAnswerVariant);

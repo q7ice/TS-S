@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "migrate": "node .\\src\\repository\\init"
+    "migrate": "node .\\src\\repository\\migration",
+    "dbtest": "node .\\src\\repository\\dbtest"
   },
   "keywords": [],
   "author": "",

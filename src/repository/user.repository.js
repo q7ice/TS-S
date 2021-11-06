@@ -3,11 +3,12 @@ const { User } = require('./models');
 
 class UserRepository {
   static async register(email, password, userRole = roles.USER) {
-    return await User.create({
+    const { dataValues: user } = await User.create({
       email,
       password,
       userRole,
     });
+    return user.id;
   }
 
   static async isAvailableEmail(email) {
