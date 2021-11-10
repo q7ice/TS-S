@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 1,
     },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   };
   const options = {
     sequelize,

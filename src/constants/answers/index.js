@@ -1,11 +1,14 @@
 const answers = {
   success: {
-    registration: 'Registration was successful',
-    login: 'Login was successful',
-    activation: 'Activation was successful',
-    logout: 'Logout was successful',
+    registration: 'Регистрация прошла успешно',
+    login: 'Вход прошёл успешно',
+    activation: 'Активация прошла успешно',
+    logout: 'Выход прошёл успешно',
     create: {
-      recipe: 'Creating recipe was successful',
+      test: 'Создание теста прошло успешно',
+    },
+    edit: {
+      test: 'Изменение теста прошло успешно',
     },
     change: {
       name: 'Changing name was successfully',
@@ -20,6 +23,7 @@ const answers = {
     incorrectCredentials: 'Incorrect email or password',
     impossiblePassword: 'Impossible password',
     impossibleEmail: 'Impossible email',
+    tokenIsUnset: 'Токен не установлен',
   },
 };
 

@@ -13,8 +13,8 @@ class TokenService {
     return null;
   }
 
-  static generate(userId) {
-    const dataForToken = { userId };
+  static generate(userId, userRole) {
+    const dataForToken = { userId, userRole };
     return jwt.sign(dataForToken, auth.SECRET_KEY, { expiresIn: '30d' });
   }
 }

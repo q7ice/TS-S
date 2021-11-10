@@ -1,4 +1,7 @@
-const { ChoiceAnswerVariant } = require('./models');
+const { Op } = require('sequelize');
+const {
+  ChoiceAnswerVariant,
+} = require('./models');
 
 class ChoiceAnswerVariantRepository {
   static async createBulk(choiceAnswerVariants) {
@@ -8,7 +11,21 @@ class ChoiceAnswerVariantRepository {
       ?.map(({ id }) => id);
   }
 
-  static async getTests() {
+  static async findAll(questionIds) {
+    const questionVariants = questionIds.map((id) => ({ QuestionId: id }));
+    console.log(questionVariants);
+    const response = await ChoiceAnswerVariant.findAll({
+      where: {
+        [Op.or]: questionVariants,
+      },
+    });
+    const result = response?.map((item) => item.dataValues)
+      ?.map(({
+        id, value, isTrue, QuestionId,
+      }) => ({
+        id, value, isTrue, QuestionId,
+      }));
+    return result;
   }
 }
 

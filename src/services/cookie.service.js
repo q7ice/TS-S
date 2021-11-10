@@ -1,7 +1,7 @@
 const jwt = 'jwt';
 class CookieService {
   static setToken(ctx, value) {
-    ctx.cookies.set(jwt, value);
+    ctx.cookies.set(jwt, value, { maxAge: 30 * 24 * 60 * 60 * 1000 });
   }
 
   static getToken(ctx) {

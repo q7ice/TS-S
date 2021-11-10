@@ -1,6 +1,7 @@
 const { answers } = require('../constants/answers');
 const { AuthService } = require('../services/auth.service');
 const { CookieService } = require('../services/cookie.service');
+const { TokenService } = require('../services/token.service');
 
 class AuthController {
   static async registration(ctx) {
@@ -9,11 +10,35 @@ class AuthController {
     ctx.body = { message: answers.success.registration };
   }
 
+  static async validate(ctx) {
+    const { userId } = ctx.request;
+    if (!userId) {
+      CookieService.clearToken(ctx);
+      ctx.body = { error: answers.error.tokenIsUnset };
+    } else {
+      const { token, id, role } = await AuthService.refreshToken(userId);
+      CookieService.setToken(ctx, token);
+      ctx.body = {
+        message: answers.success.login,
+        body: {
+          id,
+          role,
+        },
+      };
+    }
+  }
+
   static async login(ctx) {
     const { email, password } = ctx.request.body;
-    const token = await AuthService.login(email, password);
+    const { id, role, token } = await AuthService.login(email, password);
     CookieService.setToken(ctx, token);
-    ctx.body = { message: answers.success.login };
+    ctx.body = {
+      message: answers.success.login,
+      body: {
+        id,
+        role,
+      },
+    };
   }
 
   static async logout(ctx) {

@@ -21,8 +21,14 @@ const testData = {
   }],
 };
 
+async function init() {
+  const UserId = await UserRepository.register('test@mail.ru', '123123');
+  await TestService.create(UserId, testData.name, testData.questions);
+}
+
 async function run() {
-  await TestService.create(1, testData.name, testData.questions);
+  // await init();
+  await TestService.getOne(1);
 }
 
 run().catch().finally(async () => await sequelize.close());

@@ -18,9 +18,24 @@ class AuthService {
     const user = await UserRepository.searchUserByEmail(email);
     const allowedAccess = user && PasswordService.compare(password, user.password);
     if (allowedAccess) {
-      return TokenService.generate(user.id);
+      const token = TokenService.generate(user.id, user.role);
+      return {
+        token,
+        id: user.id,
+        role: user.role,
+      };
     }
     throw Error(answers.error.incorrectCredentials);
+  }
+
+  static async refreshToken(id) {
+    const role = await UserRepository.getUserRoleById(id);
+    const token = TokenService.generate(id, role);
+    return {
+      token,
+      id,
+      role,
+    };
   }
 
   static async isAvailableEmail(email = '') {

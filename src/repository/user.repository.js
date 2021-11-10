@@ -30,8 +30,8 @@ class UserRepository {
     }
   }
 
-  static async getUserRoleById(userId) {
-    const user = await User.findOne({ where: { id: userId } });
+  static async getUserRoleById(UserId) {
+    const user = await User.findOne({ where: { id: UserId } });
     return user?.dataValues?.role;
   }
 
