@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   const attributes = {
+    isTrue: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   };
   const options = {
     sequelize,

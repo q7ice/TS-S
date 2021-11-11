@@ -24,5 +24,9 @@ router.post('/getOne', tokenValidation, TestController.getOne);
 router.post('/createNewTest', tokenValidation, TestController.createTest);
 router.post('/editTest', tokenValidation, TestController.editTest);
 router.post('/destroyTest', tokenValidation, TestController.destroyTest);
+router.post('/takeTest', tokenValidation, TestController.takeTest);
+router.post('/changeOpenTest', tokenValidation, TestController.changeOpenTest);
+router.post('/saveAnswers', tokenValidation, TestController.saveAnswers);
+router.post('/getResults', tokenValidation, TestController.getResults);
 
 module.exports = router;

@@ -8,10 +8,9 @@ class AuthService {
     const emailCheck = await UserRepository.isAvailableEmail(email);
     if (emailCheck) {
       const passwordHash = PasswordService.getHash(password);
-      await UserRepository.register(email, passwordHash);
-    } else {
-      throw Error(answers.error.unavailableEmail);
+      return await UserRepository.register(email, passwordHash);
     }
+    throw Error(answers.error.unavailableEmail);
   }
 
   static async login(email, password) {

@@ -1,6 +1,12 @@
 const { Test } = require('./models');
 
 class TestRepository {
+  static async changeOpenTest(TestId) {
+    const test = await Test.findOne({ where: { id: TestId } });
+    test.isOpen = !test.isOpen;
+    await test.save();
+  }
+
   static async create(name, UserId) {
     const test = await Test.create({ name, UserId });
     return test?.dataValues?.id;

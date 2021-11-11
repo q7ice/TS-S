@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     isOpen: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: true,
     },
   };
   const options = {

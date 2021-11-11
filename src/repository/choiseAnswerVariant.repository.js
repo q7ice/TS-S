@@ -13,7 +13,6 @@ class ChoiceAnswerVariantRepository {
 
   static async findAll(questionIds) {
     const questionVariants = questionIds.map((id) => ({ QuestionId: id }));
-    console.log(questionVariants);
     const response = await ChoiceAnswerVariant.findAll({
       where: {
         [Op.or]: questionVariants,

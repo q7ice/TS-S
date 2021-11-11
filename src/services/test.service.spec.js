@@ -1,11 +1,7 @@
 const { TestService } = require('./test.service');
+const { AuthService } = require('./auth.service');
 
 // eslint-disable-next-line
-test('Create a new test', () => {
-  TestService.create(1, 'Тест по математике', [{
-    type: 'text',
-    description: '2+2?',
-    cost: 1,
-    answers: [{ value: '4', isTrue: true }],
-  }]);
+test('Create a new test', async () => {
+  const userId1 = await AuthService.register('test1@mail.com', '123123');
 });
