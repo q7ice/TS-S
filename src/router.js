@@ -29,4 +29,10 @@ router.post('/changeOpenTest', tokenValidation, TestController.changeOpenTest);
 router.post('/saveAnswers', tokenValidation, TestController.saveAnswers);
 router.post('/getResults', tokenValidation, TestController.getResults);
 
+const checkWorking = async (ctx) => {
+  ctx.body = 'Server is working';
+};
+
+router.get('/checkWorking', checkWorking);
+
 module.exports = router;
