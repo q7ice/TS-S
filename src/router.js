@@ -30,7 +30,7 @@ router.post('/saveAnswers', tokenValidation, TestController.saveAnswers);
 router.post('/getResults', tokenValidation, TestController.getResults);
 
 const test = async (ctx) => {
-  ctx.body = 'Server is working';
+  ctx.body = { message: 'Server is working' };
 };
 
 router.get('/test', test);
