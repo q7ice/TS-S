@@ -6,6 +6,7 @@ const { roles } = require('../constants/permissions/roles');
 
 class AuthService {
   static async registerAdmin(email, password, secret) {
+    console.log(process.env.SECRET);
     if (secret === process.env.SECRET) {
       const emailCheck = await UserRepository.isAvailableEmail(email);
       if (emailCheck) {
