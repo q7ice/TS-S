@@ -15,7 +15,7 @@ class AuthService {
       }
       throw new Error(answers.error.unavailableEmail);
     } else {
-      throw new Error('Ключ приглашения недействителен');
+      throw new Error(`Ключ приглашения ${process.env.SECRET} недействителен`);
     }
   }
 
