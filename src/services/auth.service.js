@@ -2,8 +2,22 @@ const { UserRepository } = require('../repository/user.repository');
 const { PasswordService } = require('./password.service');
 const { TokenService } = require('./token.service');
 const { answers } = require('../constants/answers');
+const { roles } = require('../constants/permissions/roles');
 
 class AuthService {
+  static async registerAdmin(email, password, secret) {
+    if (secret === process.env.SECRET) {
+      const emailCheck = await UserRepository.isAvailableEmail(email);
+      if (emailCheck) {
+        const passwordHash = PasswordService.getHash(password);
+        return await UserRepository.register(email, passwordHash, roles.ADMIN);
+      }
+      throw new Error(answers.error.unavailableEmail);
+    } else {
+      throw new Error(answers.error.incorrectCredentials);
+    }
+  }
+
   static async register(email, password) {
     const emailCheck = await UserRepository.isAvailableEmail(email);
     if (emailCheck) {

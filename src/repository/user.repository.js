@@ -2,11 +2,24 @@ const { roles } = require('../constants/permissions/roles');
 const { User } = require('./models');
 
 class UserRepository {
-  static async register(email, password, userRole = roles.USER) {
+  static async isExist(UserId) {
+    const user = await User.findOne({ where: { id: UserId } });
+    return !!user;
+  }
+
+  static async block(id) {
+    const user = await User.findOne({ where: { id } });
+    user?.set({
+      role: roles.BLOCK,
+    });
+    await user?.save();
+  }
+
+  static async register(email, password, role = roles.USER) {
     const { dataValues: user } = await User.create({
       email,
       password,
-      userRole,
+      role,
     });
     return user.id;
   }

@@ -1,7 +1,7 @@
 const { TokenService } = require('../services/token.service');
 const { CookieService } = require('../services/cookie.service');
 
-async function tokenValidationMiddleware(ctx, next) {
+async function tokenValidation(ctx, next) {
   const token = CookieService.getToken(ctx);
   if (token) {
     const { userId } = TokenService.parse(token);
@@ -13,5 +13,5 @@ async function tokenValidationMiddleware(ctx, next) {
 }
 
 module.exports = {
-  tokenValidationMiddleware,
+  tokenValidation,
 };

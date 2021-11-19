@@ -1,9 +1,14 @@
 const { answers } = require('../constants/answers');
 const { AuthService } = require('../services/auth.service');
 const { CookieService } = require('../services/cookie.service');
-const { TokenService } = require('../services/token.service');
 
 class AuthController {
+  static async adminRegistration(ctx) {
+    const { email, password, secret } = ctx.request.body;
+    await AuthService.registerAdmin(email, password, secret);
+    ctx.body = { message: answers.success.registration };
+  }
+
   static async registration(ctx) {
     const { email, password } = ctx.request.body;
     await AuthService.register(email, password);
@@ -17,14 +22,25 @@ class AuthController {
       ctx.body = { error: answers.error.tokenIsUnset };
     } else {
       const { token, id, role } = await AuthService.refreshToken(userId);
-      CookieService.setToken(ctx, token);
-      ctx.body = {
-        message: answers.success.login,
-        body: {
-          id,
-          role,
-        },
-      };
+      if (role) {
+        CookieService.setToken(ctx, token);
+        ctx.body = {
+          message: answers.success.login,
+          body: {
+            id,
+            role,
+          },
+        };
+      } else {
+        CookieService.clearToken(ctx);
+        ctx.body = {
+          message: 'Что-то пошло не так',
+          body: {
+            id: null,
+            role: null,
+          },
+        };
+      }
     }
   }
 
