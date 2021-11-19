@@ -14,7 +14,7 @@ class AuthService {
       }
       throw new Error(answers.error.unavailableEmail);
     } else {
-      throw new Error(answers.error.incorrectCredentials);
+      throw new Error('Ключ приглашения недействителен');
     }
   }
 

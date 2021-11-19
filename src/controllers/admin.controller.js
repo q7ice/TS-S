@@ -6,7 +6,6 @@ class AdminController {
   static async blockUser(ctx) {
     const { blockId } = ctx.request.body;
     const { userId } = ctx.request;
-    console.log(userId, blockId);
     if (blockId === userId) {
       throw new Error('Нельзя заблокировать самого себя!');
     } else {
