@@ -23,9 +23,7 @@ router.get('/personal-data', tokenValidation, UserSettingsController.getPersonal
 router.get('/getAllTests', tokenValidation, TestController.getAll);
 
 router.post('/blockUser', adminValidation, AdminController.blockUser);
-
 router.post('/getOne', tokenValidation, TestController.getOne);
-
 router.post('/createNewTest', tokenValidation, TestController.createTest);
 router.post('/editTest', tokenValidation, TestController.editTest);
 router.post('/destroyTest', tokenValidation, TestController.destroyTest);
@@ -34,10 +32,7 @@ router.post('/changeOpenTest', tokenValidation, TestController.changeOpenTest);
 router.post('/saveAnswers', tokenValidation, TestController.saveAnswers);
 router.post('/getResults', tokenValidation, TestController.getResults);
 
-const test = async (ctx) => {
-  ctx.body = { message: 'Server is working' };
-};
-
+const test = async (ctx) => { ctx.body = { message: 'Server is working' }; };
 router.get('/test', test);
 
 module.exports = router;
