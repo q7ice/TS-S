@@ -6,7 +6,6 @@ const { roles } = require('../constants/permissions/roles');
 
 class AuthService {
   static async registerAdmin(email, password, secret) {
-    console.log(process.env.SECRET);
     if (secret === process.env.SECRET) {
       const emailCheck = await UserRepository.isAvailableEmail(email);
       if (emailCheck) {
@@ -15,7 +14,7 @@ class AuthService {
       }
       throw new Error(answers.error.unavailableEmail);
     } else {
-      throw new Error(`Ключ приглашения ${process.env.SECRET} недействителен`);
+      throw new Error('Ключ приглашения недействителен');
     }
   }
 
